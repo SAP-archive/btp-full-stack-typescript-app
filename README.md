@@ -70,6 +70,12 @@ npm run start-ui:ts
 
 The UI5 app is now running on http://localhost:8080/index.html (a browser window with this URL opens automatically).
 
+For local development with **mock authentication** use one of the following **users** to test the app:
+| ID | password |
+| ----------- | ----------- |
+| _admin_ | _initial_ |
+| _viewer_ | _initial_ |
+
 ### Run the App locally in watch mode
 
 ```sh
@@ -77,6 +83,12 @@ npm run watch
 ```
 
 This starts a local development server in watch mode. Changes to files (including the uncompiled TypeScript resources) are automatically detected and applied. The CAP service is now available at http://localhost:4004 (a browser window with this URL opens automatically to show the generic index.html page), and the UI5 app can be accessed at http://localhost:4004/webapp/index.html.
+
+For local development with **mock authentication** use one of the following **users** to test the app:
+| ID | password |
+| ----------- | ----------- |
+| _admin_ | _initial_ |
+| _viewer_ | _initial_ |
 
 ### Build the MTA and Deploy to Cloud Foundry
 
@@ -110,10 +122,6 @@ None at the moment.
 ## How to obtain Support
 
 This content is provided "as-is" with no other support.
-
-In case you find a bug, please [create an issue](https://github.com/SAP-samples/btp-full-stack-typescript-app/issues) in this repository.
-
-Questions can be [asked in SAP Community](https://answers.sap.com/questions/ask.html).
 
 ## License
 
