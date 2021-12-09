@@ -132,7 +132,7 @@ This content is provided "as-is" with no other support.
 Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.
 
 [license-image]: https://img.shields.io/github/license/SAP-samples/btp-full-stack-typescript-app.svg
-[license-url]: https://github.com/SAP-samples/btp-full-stack-typescript-app/blob/master/LICENSE
+[license-url]: https://github.com/SAP-samples/btp-full-stack-typescript-app/blob/main/LICENSE
 [reuse-image]: https://api.reuse.software/badge/github.com/SAP-samples/btp-full-stack-typescript-app
 [reuse-url]: https://api.reuse.software/info/github.com/SAP-samples/btp-full-stack-typescript-app
 [vscode-image]: https://open.vscode.dev/badges/open-in-vscode.svg
