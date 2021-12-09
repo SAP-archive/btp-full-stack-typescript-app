@@ -1,0 +1,41 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   xmlns:l="sap.ui.layout"
+   xmlns:f="sap.ui.layout.form" >
+   <Dialog id="lectureEventDialog" title ="{i18n>eventDialogTitle}">
+    <content>
+      <f:SimpleForm id="lectureEventDialogForm" binding="{/createEvent(...)}">
+        <Label text="{i18n>reqSeats}" labelFor="reqSeatsInput"/>
+        <Input value="{
+          path: '$Parameter/reqSeats',
+          type: 'sap.ui.model.type.Integer',
+          constraints : {
+              minimum: '0'
+          }
+        }" 
+        id="reqSeatsInput" 
+        type="Number" 
+        required="true" 
+        validationError="handleNumberInputError" 
+        validationSuccess="handleNumberInputSuccess"/>
+        <Label text="{i18n>eventDate}" labelFor="dtpAlldayEvent"/>
+        <DatePicker
+          required="true"
+          id="dtpAlldayEvent"
+          value="{ 
+            path: '$Parameter/date', 
+            type: 'sap.ui.model.odata.type.DateTimeOffset', 
+            formatOptions: { pattern: 'MMM d, y'}
+          }"
+          change="handleDtpChange"/>
+      </f:SimpleForm>
+    </content>  
+    <beginButton>
+      <Button type="Emphasized" text="{i18n>save}" press="handleEventSave"></Button>
+    </beginButton>
+    <endButton>
+      <Button text="{i18n>cancle}" press="handleEventClose"></Button>
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

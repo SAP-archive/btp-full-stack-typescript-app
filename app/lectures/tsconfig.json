@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "ES2015",
+        "module": "ES2015",
+        "skipLibCheck": true,
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "allowJs": true,
+        "strict": true,
+        "strictNullChecks": false,
+        "strictPropertyInitialization": false,
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "baseUrl": "./",
+        "paths": {
+            "lectures/*": [
+                "./src/*"
+            ]
+        }
+    },
+    "typeRoots": [
+        "./node_modules/@types"
+    ],
+    "include": [
+        "./src/**/*"
+    ]
+}

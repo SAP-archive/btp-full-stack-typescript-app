@@ -1,0 +1,27 @@
+<mvc:View
+    controllerName="lectures.controller.MainView"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:tnt="sap.tnt"
+>
+    <tnt:ToolPage>
+        <tnt:header>
+            <f:ShellBar
+                id="shellBar"
+                title="{i18n>appTitle}"
+                avatarPressed="handleAvatarPress"
+                showCopilot="false">
+                <f:profile>
+                    <f:Avatar id="avatar" initials="{parts: [{path: 'user>/firstName'}, {path: 'user>/lastName'}], formatter: '.formatter.userInitials'}"/>
+                </f:profile>
+            </f:ShellBar>
+        </tnt:header>
+        <tnt:mainContents>
+            <Shell>
+                <App id="app"></App>
+            </Shell>
+        </tnt:mainContents>
+    </tnt:ToolPage>
+</mvc:View>

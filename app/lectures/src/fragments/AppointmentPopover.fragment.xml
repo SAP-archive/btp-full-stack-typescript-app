@@ -1,0 +1,59 @@
+<core:FragmentDefinition
+		xmlns="sap.m"
+		xmlns:f="sap.ui.layout.form"
+		xmlns:core="sap.ui.core">
+	<ResponsivePopover
+			id="detailsPopover"
+			title="{course/name}"
+			class="sapUiContentPadding"
+			placement="Auto">
+		<beginButton>
+			<Button 
+				text="{i18n>edit}" 
+				visible="{
+					parts: [
+					{path: 'user>/userInfoLoaded'}, 
+					{path:'user>/roles'}
+					], 
+					formatter: '.formatter.hasAdminRole'
+				  }" 
+				type="Emphasized" 
+				press="handleEditButton"/>
+		</beginButton>
+		<endButton>
+			<Button 
+				text="{i18n>delete}" 
+				visible="{
+					parts: [
+					{path: 'user>/userInfoLoaded'}, 
+					{path:'user>/roles'}
+					], 
+					formatter: '.formatter.hasAdminRole'
+				  }" 
+				press="handleDeleteLecture"/>
+		</endButton>
+		<f:SimpleForm
+                id="lectureDetailsForm"
+                editable="false"
+                layout="ResponsiveGridLayout"
+                singleContainerFullSize="false">
+                <Label text="{i18n>course}" labelFor="courseText"/>
+                <Text id="courseText" text="{course/ID} {course/descr}"/>
+                <Label text="{i18n>room}" labelFor="roomText"/>
+                <Text id="roomText" text="{room/name} ({room/seats} seats)"/>
+                <Label text="{i18n>professor}" labelFor="profText"/>
+                <Text id="profText" text="{
+					parts: [
+					  {path: 'prof/firstname'},
+					  {path: 'prof/lastname'},
+					  {path: 'prof/title'}
+					],
+					formatter: '.formatter.professorName'
+				  }"/>               
+                <Label text="{i18n>fromDate}" labelFor="startDate"/>
+                <Text id="startDate" text="{starttime}"/>
+                <Label text="{i18n>toDate}" labelFor="endDate"/>
+                <Text id="endDate" text="{endtime}"/>
+            </f:SimpleForm>
+	</ResponsivePopover>
+</core:FragmentDefinition>

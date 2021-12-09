@@ -1,0 +1,106 @@
+<mvc:View
+controllerName="lectures.controller.RoomCalendar"
+displayBlock="true"
+xmlns="sap.m"
+xmlns:core="sap.ui.core"
+xmlns:unified="sap.ui.unified"
+xmlns:mvc="sap.ui.core.mvc">
+<core:Fragment fragmentName="lectures.fragments.MessageStripSection" type="XML" />
+<PlanningCalendar
+    id="roomCalendar"
+    rows="{path : '/Rooms', suspended: true, parameters : { $expand : 'lectures', $$updateGroupId : 'LectureUpdateGroup' }}"
+    appointmentsVisualization="Standard"
+    appointmentSelect="handleSelectLecture"
+    showEmptyIntervalHeaders="false">
+    <toolbarContent>
+      <Title text="{i18n>calendarTitle}"></Title>
+      <Button 
+        icon="sap-icon://add" 
+        visible="{
+          parts: [
+          {path: 'user>/userInfoLoaded'}, 
+          {path:'user>/roles'}
+          ], 
+          formatter: '.formatter.hasAdminRole'
+        }" 
+        text="{i18n>addLecture}" 
+        press="handleCreateLectureButton" 
+        tooltip="{i18n>addLectureTip}" 
+        type="Emphasized"/>
+      <Button 
+        icon="sap-icon://create-session" 
+        visible="{
+          parts: [
+          {path: 'user>/userInfoLoaded'}, 
+          {path:'user>/roles'}
+          ], 
+          formatter: '.formatter.hasAdminRole'
+        }" 
+        text="{i18n>addAlldayEvent}" 
+        press="handleCreateEvent" 
+        tooltip="{i18n>addAlldayEventTip}" 
+        type="Ghost"/>
+    </toolbarContent>
+    <rows>
+      <PlanningCalendarRow
+            icon="sap-icon://windows-doors"
+            title="{name}"
+            text="{seats} seats"
+            key="{ID}"
+            enableAppointmentsDragAndDrop="{
+              parts: [
+              {path: 'user>/userInfoLoaded'}, 
+              {path:'user>/roles'}
+              ], 
+              formatter: '.formatter.hasAdminRole'
+            }"
+						enableAppointmentsResize="{
+              parts: [
+              {path: 'user>/userInfoLoaded'}, 
+              {path:'user>/roles'}
+              ], 
+              formatter: '.formatter.hasAdminRole'
+            }"
+						enableAppointmentsCreate="{
+              parts: [
+              {path: 'user>/userInfoLoaded'}, 
+              {path:'user>/roles'}
+              ], 
+              formatter: '.formatter.hasAdminRole'
+            }"
+						appointmentDrop="handleDropLecture"
+						appointmentResize="handleResizeLecture"
+						appointmentCreate="handleCreateLecture"
+            appointments="{
+              path : 'lectures', 
+              parameters : { 
+                $expand : 'room,prof,course', 
+                $$updateGroupId : 'LectureUpdateGroup' },  
+                templateShareable: false
+              }">
+        <appointments>
+          <unified:CalendarAppointment
+              startDate="{starttime}"
+              endDate="{endtime}"
+              icon="{path: 'allday', targetType: 'Boolean', formatter: '.formatter.lectureIcon'}"
+              title= "{ 
+                parts: [
+                  {path: 'course/name'},
+                  {path: 'room/name'}
+                ], 
+                formatter: '.formatter.appointmentTitle'}"
+              text= "{
+                parts: [
+                  {path: 'prof/firstname'},
+                  {path: 'prof/lastname'},
+                  {path: 'prof/title'}
+                ],
+                formatter: '.formatter.professorName'
+              }"
+              type="{path: 'allday', targetType: 'Boolean', formatter: '.formatter.lectureType'}">
+          </unified:CalendarAppointment>
+        </appointments>
+      </PlanningCalendarRow>
+    </rows>
+  </PlanningCalendar>
+</mvc:View>

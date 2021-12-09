@@ -1,0 +1,89 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   xmlns:l="sap.ui.layout"
+   xmlns:f="sap.ui.layout.form" >
+   <Dialog
+    id="lectureDialog">
+      <content>
+        <l:VerticalLayout
+        class="sapUiContentPadding"
+        width="100%">
+            <f:SimpleForm
+                id="lectureDialogForm"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                singleContainerFullSize="false">
+                <Label text="{i18n>course}" labelFor="courseInput"/>
+                <ComboBox
+                  id="courseComboBox"
+                  showSecondaryValues= "true"
+                  filterSecondaryValues= "true"
+                  selectedKey="{course_ID}"
+                  items="{/Courses}"
+                  change="handleComboBoxChange">
+                  <core:ListItem key="{ID}" text="{name}" additionalText="{ID}"/>
+                </ComboBox>
+                <Label text="{i18n>room}" labelFor="roomSelect" required="true"/>
+                <ComboBox
+                  id="roomComboBox"
+                  showSecondaryValues= "true"
+                  filterSecondaryValues= "true"
+                  selectedKey="{room_ID}"
+                  items="{/Rooms}"
+                  change="handleComboBoxChange">
+                  <core:ListItem key="{ID}" text="{name}" additionalText="{ID}"/>
+                </ComboBox>
+                <Label text="{i18n>professor}" labelFor="profInput"/>
+                <ComboBox
+                  id="profComboBox"
+                  showSecondaryValues= "true"
+                  filterSecondaryValues= "true"
+                  selectedKey="{prof_ID}"
+                  items="{/Professors}"
+                  change="handleComboBoxChange">
+                  <core:ListItem key="{ID}" text="{firstname} {lastname}" additionalText="{title}"/>
+                </ComboBox>
+                <Label text="{i18n>fromDate}" labelFor="startDate"/>
+                <DateTimePicker
+                        id="dtpStartDate"
+                        required="true"
+                        minutesStep="5"
+                        secondsStep="60"
+                        value="{ 
+                          path: 'starttime', 
+                          type: 'sap.ui.model.odata.type.DateTimeOffset',
+                          constraints: {
+                            precision: 3,
+                            v4: true
+                          },
+                          formatOptions: { pattern: 'MMM d, y, h:mm a'}
+                        }"
+                        change="handleDtpChange"/>
+                <Label text="{i18n>toDate}" labelFor="endDate"/>
+                <DateTimePicker
+                        id="dtpEndDate"
+                        required="true"
+                        minutesStep="5"
+                        secondsStep="60"
+                        value="{
+                          path: 'endtime', 
+                          type: 'sap.ui.model.odata.type.DateTimeOffset',
+                          constraints: {
+                            precision: 3,
+                            v4: true
+                          },
+                          formatOptions: { pattern: 'MMM d, y, h:mm a'}
+                        }"
+                        change="handleDtpChange"/>
+            </f:SimpleForm>
+        </l:VerticalLayout>
+      </content>
+      <beginButton>
+        <Button type="Emphasized" text="{i18n>save}" press="handleSave"></Button>
+      </beginButton>
+      <endButton>
+        <Button text="{i18n>cancle}" press="handleClose"></Button>
+      </endButton>
+   </Dialog>
+</core:FragmentDefinition>

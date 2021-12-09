@@ -1,0 +1,119 @@
+_schema-version: "3.1"
+ID: lecture-schedule
+description: A sample project to demonstrate how to implement a full-stack app with CAP + SAPUI5 and TypeScript.
+version: 1.0.0
+
+parameters:
+  appname: lecture-schedule
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install --production
+        - npm run build:cf
+        #- npx rimraf gen/db/src/gen/data # Uncomment this line to prevent reset of DB with .csv sample data
+
+modules:
+  - name: lecture-app-router
+    type: approuter.nodejs
+    path: router
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: lecture-schedule-html5-repo-runtime
+      - name: lecture-schedule-destination
+      - name: lecture-schedule-uaa
+      - name: srv-api
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          strictSSL: false
+          name: lecture-schedule-app-srv
+          url: ~{url}
+  - name: lecture-schedule-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+      - name: lecture-schedule-uaa
+      - name: lecture-schedule-db
+    provides:
+      - name: srv-api
+        properties:
+          url: ${default-url}
+  - name: lecture-schedule-db-deployer
+    type: hdb
+    path: gen/db
+    requires:
+      - name: lecture-schedule-uaa
+      - name: lecture-schedule-db
+  - name: lecture-schedule-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: lecture-schedule-html5-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: app_resources
+      requires:
+        - artifacts:
+            - lectures.zip
+          name: lectures
+          target-path: app_resources/
+  - name: lectures
+    type: html5
+    path: app/lectures
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
+
+resources:
+  - name: lecture-schedule-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application
+  - name: lecture-schedule-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+    properties:
+      hdi-service-name: ${service-name}
+  - name: lecture-schedule-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-plan: lite
+  - name: lecture-schedule-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: lecture-schedule-html5-repo-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
+      service-name: html5-apps-repo-rt

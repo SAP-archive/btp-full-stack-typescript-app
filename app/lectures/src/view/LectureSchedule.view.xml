@@ -1,0 +1,21 @@
+<mvc:View 
+displayBlock="true"
+xmlns="sap.m"
+xmlns:core="sap.ui.core"
+xmlns:mvc="sap.ui.core.mvc">
+<Page id="LectureSchedule" showHeader="false">
+	<IconTabBar
+		id="tabBarCalendars"
+		expandable="false"
+		class="sapUiSmallMarginBottom sapUiSmallMarginTop">
+		<items>
+			<IconTabFilter id="profTab" text="{i18n>profTab}" key="prof">
+				<mvc:XMLView viewName="lectures.view.ProfCalendar"/>
+			</IconTabFilter>
+			<IconTabFilter id="roomTab" text="{i18n>roomTab}" key="room">
+				<mvc:XMLView id="view1" viewName="lectures.view.RoomCalendar"/>
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
+</Page>
+</mvc:View>

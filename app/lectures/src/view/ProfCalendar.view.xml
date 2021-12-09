@@ -1,0 +1,111 @@
+<mvc:View
+controllerName="lectures.controller.ProfCalendar"
+displayBlock="true"
+xmlns="sap.m"
+xmlns:core="sap.ui.core"
+xmlns:unified="sap.ui.unified"
+xmlns:mvc="sap.ui.core.mvc">
+  <core:Fragment fragmentName="lectures.fragments.MessageStripSection" type="XML" />
+  <SinglePlanningCalendar
+    id="profCalendar"
+    title= "{i18n>calendarTitle}"
+    startHour="7"
+    endHour="21"
+    fullDay="false"
+    enableAppointmentsCreate="{
+      parts: [
+      {path: 'user>/userInfoLoaded'}, 
+      {path:'user>/roles'}
+      ], 
+      formatter: '.formatter.hasAdminRole'
+    }"
+    enableAppointmentsDragAndDrop="{
+      parts: [
+      {path: 'user>/userInfoLoaded'}, 
+      {path:'user>/roles'}
+      ], 
+      formatter: '.formatter.hasAdminRole'
+    }"
+    enableAppointmentsResize="{
+      parts: [
+      {path: 'user>/userInfoLoaded'}, 
+      {path:'user>/roles'}
+      ], 
+      formatter: '.formatter.hasAdminRole'
+    }"
+    appointmentCreate="handleCreateLecture"
+    appointmentSelect="handleSelectLecture"
+    appointmentDrop="handleDropLecture"
+    appointmentResize="handleResizeLecture"
+    appointments="{
+      parameters : {
+        $count : true,
+        $expand : 'room,prof,course',
+        $$updateGroupId : 'LectureUpdateGroup'
+      },
+      path : '/Lectures',
+      templateShareable : false
+    }">
+    <actions>
+      <ComboBox
+        id="profFilter"
+        showSecondaryValues= "true"
+        filterSecondaryValues= "true"
+        placeholder="{i18n>profFilterPlaceholder}"
+        items="{/Professors}"
+        change="handleFilter">
+        <core:ListItem key="{ID}" text="{firstname} {lastname}" additionalText="{title}"/>
+      </ComboBox>
+      <Button 
+        icon="sap-icon://add" 
+        visible="{
+          parts: [
+          {path: 'user>/userInfoLoaded'}, 
+          {path:'user>/roles'}
+          ], 
+          formatter: '.formatter.hasAdminRole'
+        }" 
+        text="{i18n>addLecture}" 
+        press="handleCreateLecture" 
+        tooltip="{i18n>addLectureTip}" 
+        type="Emphasized"/>
+      <Button 
+        icon="sap-icon://create-session" 
+        visible="{
+          parts: [
+          {path: 'user>/userInfoLoaded'}, 
+          {path:'user>/roles'}
+          ], 
+          formatter: '.formatter.hasAdminRole'
+        }"
+        text="{i18n>addAlldayEvent}" 
+        press="handleCreateEvent" 
+        tooltip="{i18n>addAlldayEventTip}" 
+        type="Ghost"/>
+    </actions>
+    <appointments>
+      <unified:CalendarAppointment
+        title= "{ 
+          parts: [
+            {path: 'course/name'},
+            {path: 'room/name'}
+          ], 
+          formatter: '.formatter.appointmentTitle'}"
+        text= "{
+          parts: [
+            {path: 'course/descr'},
+            {path: 'prof/firstname'},
+            {path: 'prof/lastname'},
+            {path: 'prof/title'},
+            {path: 'room/name'}
+          ],
+          formatter: '.formatter.lectureDetails'
+        }"
+        type="{path: 'allday', targetType: 'Boolean', formatter: '.formatter.lectureType'}"
+        icon= "{path: 'allday', targetType: 'Boolean', formatter: '.formatter.lectureIcon'}"
+        startDate= "{starttime}"
+        endDate= "{endtime}">
+      </unified:CalendarAppointment>
+    </appointments>
+  </SinglePlanningCalendar>
+</mvc:View>

@@ -1,0 +1,12 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+   <Popover showHeader="false" placement="Bottom" class="sapMOTAPopover sapTntToolHeaderPopover">
+        <Text text="{parts: [
+            'i18n>greeting',
+            'user>/firstName'
+            ], formatter: 'jQuery.sap.formatMessage'}" class="sapUiSmallMargin" visible="{= ${user>/userInfoLoaded} === true}"></Text>
+        <Text text="{i18n>greetingDefault}" class="sapUiSmallMargin" visible="{= ${user>/userInfoLoaded} === false}"></Text>
+       <Button text="{i18n>logout}" icon="sap-icon://log" type="Transparent" press="logout" visible="{= ${user>/userInfoLoaded} === true}"></Button>
+    </Popover>
+</core:FragmentDefinition>

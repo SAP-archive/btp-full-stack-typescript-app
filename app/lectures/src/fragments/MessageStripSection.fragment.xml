@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <MessageStrip
+        text="{parts: [
+            'i18n>serviceError',
+            'error>/metadataMessage'
+            ],
+            formatter: 'jQuery.sap.formatMessage'}"
+        enableFormattedText="true"
+        type="Warning"
+        showIcon="true"
+        visible="{= ${error>/metadataLoaded} === false}"
+        class="sapUiSmallMarginBottom">
+    </MessageStrip>
+    <MessageStrip
+        text="{i18n>userInfoError}"
+        type="Information"
+        showIcon="true"
+        visible="{= ${user>/userInfoLoaded} === false}"
+        class="sapUiSmallMarginBottom">
+    </MessageStrip>
+</core:FragmentDefinition>

@@ -1,0 +1,93 @@
+{
+    "name": "lecture-schedule",
+    "version": "1.0.0",
+    "description": "A sample project to demonstrate how to implement a full-stack app with CAP + SAPUI5 and TypeScript.",
+    "repository": "<Add your repository here>",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "@sap/cds": "^5.6.3",
+        "@sap/xsenv": "^3.1.1",
+        "@sap/xssec": "^3.2.7",
+        "express": "^4",
+        "hdb": "^0.18.3",
+        "passport": "^0.5.0"
+    },
+    "devDependencies": {
+        "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
+        "@sap/ux-specification": "^1.90.11",
+        "@sapui5/ts-types": "^1.92.2",
+        "@types/node": "^16.11.9",
+        "@typescript-eslint/eslint-plugin": "^5.4.0",
+        "@typescript-eslint/parser": "^5.4.0",
+        "eslint": "^7.32.0",
+        "npm-run-all": "^4.1.5",
+        "sqlite3": "^5.0.2",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.5.2"
+    },
+    "engines": {
+        "node": ">=14"
+    },
+    "scripts": {
+        "start": "cds run",
+        "start-service:ts": "cds-ts run --with-mocks --in-memory",
+        "start-ui:ts": "npm --prefix ./app/lectures/ run build:ts && npm --prefix ./app/lectures/ run start:ui5",
+        "watch": "npm-run-all --parallel watch-service:ts watch-ui:ts",
+        "watch-service:ts": "cds-ts watch --open",
+        "watch-ui:ts": "npm --prefix ./app/lectures/ run watch:ts",
+        "build:cf": "npm run build:cds && npm run cleanup:ts && npm run build:ts",
+        "build:ts": "tsc",
+        "build:cds": "cds build --production",
+        "cleanup:ts": "npx rimraf gen/srv/srv/**/*.ts",
+        "lint-service": "eslint srv",
+        "lint-ui": "eslint app/lectures/src",
+        "ts-typecheck": "tsc --noEmit",
+        "undeploy": "cf undeploy lecture-schedule --delete-services --delete-service-keys"
+    },
+    "cds": {
+        "requires": {
+            "[production]": {
+                "uaa": {
+                    "kind": "xsuaa",
+                    "credentials": {}
+                },
+                "db": {
+                    "kind": "sql"
+                }
+            },
+            "[development]": {
+                "auth": {
+                    "strategy": "mock",
+                    "users": {
+                        "admin": {
+                            "password": "initial",
+                            "ID": "admin",
+                            "userAttributes": {
+                                "email": "admin@tester.sap.com"
+                            },
+                            "roles": [
+                                "admin"
+                            ]
+                        },
+                        "viewer": {
+                            "password": "initial",
+                            "ID": "viewer",
+                            "userAttributes": {
+                                "email": "viewer@tester.sap.com"
+                            },
+                            "roles": [
+                                "viewer"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "hana": {
+            "deploy-format": "hdbtable"
+        }
+    },
+    "sapux": [
+        "app/lectures"
+    ]
+}

@@ -1,0 +1,18 @@
+{
+	"name": "approuter",
+	"description": "Node.js based application router service for html5-apps",
+	"dependencies": {
+		"@sap/approuter": "^10.2.0",
+		"ts-node": "^10.4.0",
+		"typescript": "^4.5.2",
+		"jwt-decode": "^3.1.2"
+	},
+	"scripts": {
+		"start": "ts-node extended-server.ts"
+	},
+	"devDependencies": {
+		"@types/jwt-decode": "^3.1.0",
+		"@types/node": "^16.11.10",
+		"tslib": "^2.3.1"
+	}
+}
