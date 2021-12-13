@@ -34,6 +34,11 @@ modules:
           strictSSL: false
           name: lecture-schedule-app-srv
           url: ~{url}
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:ts
   - name: lecture-schedule-srv
     type: nodejs
     path: gen/srv
