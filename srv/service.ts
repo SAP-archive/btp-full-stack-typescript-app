@@ -23,7 +23,7 @@ export = (srv: Service) => {
             }
         }) as Lecture[];
         if (lectures.length > 0)
-            return req.error(400, "The selected Room is not available for this timeframe.")
+            return req.error(400, "SELECTED_ROOM_NOT_AVAILABLE")
     })
 
     srv.before('UPDATE', 'Lectures', async (req) => {
@@ -48,7 +48,7 @@ export = (srv: Service) => {
             },
         }) as Lecture[];
         if (lectures.length > 0)
-            return req.error(400, "The selected Room is not available for this timeframe.")
+            return req.error(400, "SELECTED_ROOM_NOT_AVAILABLE")
     })
 
     srv.on('createEvent', async (req) => {
@@ -89,7 +89,7 @@ export = (srv: Service) => {
             }) as Lecture;
             return lecture;
         } else {
-            return req.error(400, "No matching rooms available that day.")
+            return req.error(400, "NO_MATCHING_ROOMS_AVAILABLE")
         }
     })
 

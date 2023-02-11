@@ -1,0 +1,14 @@
+###
+POST http://localhost:4004/service/lectureSchedule/createEvent
+Content-Type: application/json
+Authorization: Basic admin:initial
+
+{}
+
+###
+POST http://localhost:4004/service/lectureSchedule/createEvent
+Content-Type: application/json
+Authorization: Basic admin:initial
+Accept-Language: de_DE
+
+{}
