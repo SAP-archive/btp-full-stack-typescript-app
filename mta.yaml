@@ -14,7 +14,7 @@ build-parameters:
       commands:
         - npm install --production
         - npm run build:cf
-        #- npx rimraf gen/db/src/gen/data # Uncomment this line to prevent reset of DB with .csv sample data
+        - npx rimraf gen/db/src/gen/data # Uncomment this line to prevent reset of DB with .csv sample data
 
 modules:
   - name: lecture-app-router

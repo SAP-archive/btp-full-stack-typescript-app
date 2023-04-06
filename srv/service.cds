@@ -1,53 +1,53 @@
 using {lectureschedule as my} from '../db/schema';
 
-@path : 'service/lectureSchedule'
+@path: 'service/lectureSchedule'
 service LectureService {
 
-    entity Lectures @(restrict : [
+    entity Lectures @(restrict: [
         {
-            grant : ['READ'],
-            to    : ['viewer']
+            grant: ['READ'],
+            to   : ['viewer']
         },
         {
-            grant : ['*'],
-            to    : ['admin']
+            grant: ['*'],
+            to   : ['admin']
         }
     ]) as projection on my.Lectures;
 
-    entity Rooms @(restrict : [
+    entity Rooms @(restrict: [
         {
-            grant : ['READ'],
-            to    : ['viewer']
+            grant: ['READ'],
+            to   : ['viewer']
         },
         {
-            grant : ['*'],
-            to    : ['admin']
+            grant: ['*'],
+            to   : ['admin']
         }
     ]) as projection on my.Rooms;
 
-    entity Courses @(restrict : [
+    entity Courses @(restrict: [
         {
-            grant : ['READ'],
-            to    : ['viewer']
+            grant: ['READ'],
+            to   : ['viewer']
         },
         {
-            grant : ['*'],
-            to    : ['admin']
+            grant: ['*'],
+            to   : ['admin']
         }
     ]) as projection on my.Courses;
 
-    entity Professors @(restrict : [
+    entity Professors @(restrict: [
         {
-            grant : ['READ'],
-            to    : ['viewer']
+            grant: ['READ'],
+            to   : ['viewer']
         },
         {
-            grant : ['*'],
-            to    : ['admin']
+            grant: ['*'],
+            to   : ['admin']
         }
     ]) as projection on my.Professors;
 
-    @requires : 'admin'
+    @requires: 'admin'
     action createEvent(reqSeats : Integer, date : DateTime) returns Lectures;
 
 }
