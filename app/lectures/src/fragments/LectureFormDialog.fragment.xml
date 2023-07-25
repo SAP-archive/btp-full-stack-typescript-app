@@ -83,7 +83,7 @@
         <Button type="Emphasized" text="{i18n>save}" press="handleSave"></Button>
       </beginButton>
       <endButton>
-        <Button text="{i18n>cancle}" press="handleClose"></Button>
+        <Button text="{i18n>cancel}" press="handleClose"></Button>
       </endButton>
    </Dialog>
 </core:FragmentDefinition>
