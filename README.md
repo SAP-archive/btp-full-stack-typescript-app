@@ -54,6 +54,7 @@ npm install
 ```sh
 cd app/lectures
 npm install
+cd ../..
 ```
 
 ## Run, Build and Deploy the App
