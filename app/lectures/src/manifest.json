@@ -60,7 +60,7 @@
             "id": "MainView"
         },
         "dependencies": {
-            "minUI5Version": "1.96.0",
+            "minUI5Version": "1.120.8",
             "libs": {
                 "sap.ui.core": {},
                 "sap.m": {},
