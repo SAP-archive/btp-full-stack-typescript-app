@@ -35,7 +35,7 @@
       <Button type="Emphasized" text="{i18n>save}" press="handleEventSave"></Button>
     </beginButton>
     <endButton>
-      <Button text="{i18n>cancle}" press="handleEventClose"></Button>
+      <Button text="{i18n>cancel}" press="handleEventClose"></Button>
     </endButton>
   </Dialog>
 </core:FragmentDefinition>
